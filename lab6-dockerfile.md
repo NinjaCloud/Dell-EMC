@@ -1,4 +1,4 @@
-# Lab 7: Building a Dockerfile to Set Up an Ubuntu Container with WordPress
+# Lab 6: Building a Dockerfile to Set Up an Ubuntu Container with WordPress
 
 ## Task 1: Deploying MySQL and WordPress Containers
 
