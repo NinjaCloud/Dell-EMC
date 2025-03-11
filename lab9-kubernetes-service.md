@@ -2,6 +2,10 @@
 
 ## Task 1: Create a Pod
 
+```
+vi httpd-pod.yaml
+```
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -34,6 +38,10 @@ kubectl describe pod httpd-pod
 ---
 
 ## Task 2: Setup ClusterIP Service
+
+```
+vi httpd-svc.yaml
+```
 
 ```yaml
 apiVersion: v1
@@ -75,6 +83,8 @@ ssh -t ubuntu@<Node_IP> curl <Cluster_IP>:<Service_Port>
 ## Task 3: Setup NodePort Service
 
 Modify `httpd-svc.yaml`:
+
+
 ```yaml
 apiVersion: v1
 kind: Service
@@ -114,6 +124,7 @@ ssh -t ubuntu@<Node_IP> curl <Cluster_IP>:<Service_Port>
 ## Task 4: Setup LoadBalancer Service
 
 Modify `httpd-svc.yaml`:
+
 ```yaml
 apiVersion: v1
 kind: Service
