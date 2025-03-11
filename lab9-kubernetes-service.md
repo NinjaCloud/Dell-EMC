@@ -1,6 +1,6 @@
-# Lab 2: Services in Kubernetes
+# Lab: Services in Kubernetes
 
-## Task 3: Create a Pod
+## Task 1: Create a Pod
 
 ```yaml
 apiVersion: v1
@@ -33,7 +33,7 @@ kubectl describe pod httpd-pod
 
 ---
 
-## Task 4: Setup ClusterIP Service
+## Task 2: Setup ClusterIP Service
 
 ```yaml
 apiVersion: v1
@@ -72,7 +72,7 @@ ssh -t ubuntu@<Node_IP> curl <Cluster_IP>:<Service_Port>
 
 ---
 
-## Task 5: Setup NodePort Service
+## Task 3: Setup NodePort Service
 
 Modify `httpd-svc.yaml`:
 ```yaml
@@ -111,7 +111,7 @@ ssh -t ubuntu@<Node_IP> curl <Cluster_IP>:<Service_Port>
 
 ---
 
-## Task 6: Setup LoadBalancer Service
+## Task 4: Setup LoadBalancer Service
 
 Modify `httpd-svc.yaml`:
 ```yaml
@@ -145,7 +145,7 @@ curl <LoadBalancer_DNS>
 
 ---
 
-## Task 7: Delete and Recreate httpd Pod
+## Task 5: Delete and Recreate httpd Pod
 
 ### Delete Existing Pod
 ```sh
@@ -165,7 +165,7 @@ kubectl describe svc httpd-svc
 
 ---
 
-## Task 8: Cleanup Resources
+## Task 6: Cleanup Resources
 ```sh
 kubectl delete -f httpd-pod.yaml
 kubectl delete -f httpd-svc.yaml
