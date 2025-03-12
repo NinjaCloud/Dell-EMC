@@ -380,7 +380,11 @@ aws autoscaling update-auto-scaling-group --auto-scaling-group-name nodes-us-eas
 ```
 Run the below command if you are not able to retrieve the data. The below command comes in handy if you have downscaled your cluster and have scaled it up again. 
 ```
-kops export kubeconfig --admin
+export KOPS_STATE_STORE=s3://<ClusterName>
+```
+
+```
+kops export kubeconfig <ClusterName> --admin
 ```
 
 ### To delete the cluster
