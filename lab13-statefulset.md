@@ -6,7 +6,7 @@
 ## Task 1: Create Stateful Set
 ----------------------------------------------------------------------
 
-### Download file with YAML definition for an nginx StatefulSet
+### Download the YAML definition for an Nginx StatefulSet
 ```sh
 wget https://s3.ap-south-1.amazonaws.com/files.cloudthat.training/devops/kubernetes-essentials/nginx-sts.yaml
 ```
@@ -16,7 +16,7 @@ wget https://s3.ap-south-1.amazonaws.com/files.cloudthat.training/devops/kuberne
 kubectl apply -f nginx-sts.yaml
 ```
 
-### Create a headless service
+### Verify the headless service
 ```sh
 kubectl get service nginx-svc
 ```
@@ -65,7 +65,7 @@ kubectl get pods -w -l app=nginx-sts
 kubectl get pvc -l app=nginx-sts
 ```
 
-### Edit the StatefulSet YAML and reduce replicas to 3
+### Edit the StatefulSet YAML to reduce replicas to 3
 ```sh
 kubectl edit sts nginx-sts
 ```
@@ -89,7 +89,7 @@ kubectl get pvc -l app=nginx-sts
 kubectl delete -f nginx-sts.yaml
 ```
 
-### List all the PV and PVCs allocated to StatefulSet pods
+### List all PersistentVolumeClaims allocated to StatefulSet pods
 ```sh
 kubectl get pvc
 ```
@@ -97,3 +97,59 @@ kubectl get pvc
 ### Delete all PersistentVolumeClaims
 ```sh
 kubectl delete pvc --all
+```
+
+----------------------------------------------------------------------------
+## YAML Definition: nginx-sts.yaml
+----------------------------------------------------------------------------
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-sts
+spec:
+  serviceName: "nginx"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-sts
+  template:
+    metadata:
+      labels:
+        app: nginx-sts
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+```
+
+----------------------------------------------------------------------------
+## YAML Definition: Headless Service (nginx-svc.yaml)
+----------------------------------------------------------------------------
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  clusterIP: None
+  selector:
+    app: nginx-sts
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+```
