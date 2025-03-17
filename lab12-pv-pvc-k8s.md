@@ -1,6 +1,6 @@
-=============================================================
-Lab 5: Persistent Volume in Kubernetes
-=============================================================
+
+# Lab : Persistent Volume in Kubernetes
+
 
 ----------------------------------------------------------------------------
 # Task 1  Get Node Label and Create Custom Index.html on Node
